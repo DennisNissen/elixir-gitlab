@@ -1,6 +1,4 @@
 defmodule Gitlab.Projects.Project do
-  use TypedStruct
-
   alias Gitlab.Endpoint
 
   @type id :: integer()
@@ -8,9 +6,7 @@ defmodule Gitlab.Projects.Project do
 
   @behaviour Endpoint
 
-  typedstruct do
-    field(:id, id())
-  end
+  defstruct id: nil
 
   @impl Endpoint
   def endpoint_name() do

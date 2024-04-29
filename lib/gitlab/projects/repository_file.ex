@@ -1,25 +1,18 @@
 defmodule Gitlab.Projects.RepositoryFile do
-  use TypedStruct
-  use TypedStruct.Cast
-
   alias Gitlab.Endpoint
 
   @behaviour Endpoint
 
-  typedstruct do
-    plugin(TypedStruct.Cast.Plugin)
-
-    field(:file_name, String.t())
-    field(:file_path, String.t())
-    field(:size, integer())
-    field(:encoding, String.t())
-    field(:content, String.t())
-    field(:content_sha256, String.t())
-    field(:ref, String.t())
-    field(:blob_id, String.t())
-    field(:commit_id, String.t())
-    field(:last_commit_id, String.t())
-  end
+  defstruct file_name: nil,
+            file_path: nil,
+            size: nil,
+            encoding: nil,
+            content: nil,
+            content_sha256: nil,
+            ref: nil,
+            blob_id: nil,
+            commit_id: nil,
+            last_commit_id: nil
 
   @impl Endpoint
   def endpoint_name() do

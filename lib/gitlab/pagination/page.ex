@@ -5,23 +5,18 @@ defmodule Gitlab.Pagination.Page do
   If the number of resources is more than 10,000, `total`, `total_pages` and `link.last` will be `nil`.
   """
 
-  use TypedStruct
-
   alias Gitlab.Pagination
   alias Gitlab.Pagination.Link
 
-  typedstruct do
-    field(:link, Link.t(), enforce: true)
-    field(:page, integer())
-    field(:next_page, integer())
-    field(:prev_page, integer())
-    field(:per_page, integer())
-    field(:total, integer())
-    field(:total_pages, integer())
-    field(:transform, Pagination.transform())
-  end
+  defstruct link: nil,
+            page: nil,
+            next_page: nil,
+            prev_page: nil,
+            per_page: nil,
+            total: nil,
+            total_pages: nil,
+            transform: nil
 
-  @spec from_parts(Link.t(), [{atom(), binary() | nil}], Pagination.transform()) :: t()
   def from_parts(link, parts, transform) do
     parts =
       Enum.filter(parts, fn {_, value} ->

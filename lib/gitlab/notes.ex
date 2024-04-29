@@ -12,9 +12,9 @@ defmodule Gitlab.Notes do
   def create_note(client, scope, new_note) do
     notes_url = Gitlab.Endpoint.url({Note, scope})
 
-    with {:ok, new_note} <- NewNote.cast(new_note),
+    with {:ok, new_note} <- new_note,
          {:ok, body} <- Client.post(client, notes_url, new_note) do
-      Note.cast(body)
+      body
     end
   end
 end

@@ -1,22 +1,16 @@
 defmodule Gitlab.Issues.NewIssue do
-  use TypedStruct
-  use TypedStruct.Cast
+  defstruct title: nil,
+            description: nil,
+            confidential: nil,
+            assignee_ids: nil,
+            milestone_id: nil,
+            labels: nil,
+            created_at: nil,
+            due_date: nil,
+            weight: nil
 
-  typedstruct do
-    plugin(TypedStruct.Cast.Plugin)
-
-    field(:title, String.t())
-    field(:description, String.t())
-    field(:confidential, boolean())
-    field(:assignee_ids, [integer()])
-    field(:milestone_id, integer())
-    field(:labels, [String.t()])
-    field(:created_at, NaiveDateTime.t(), cast: NaiveDateTime)
-    field(:due_date, Date.t(), cast: Date)
-    field(:weight, integer())
-    # field :merge_request_to_resolve_discussions_of, integer()
-    # field :discussion_to_resolve: String.t()
-  end
+  # field :merge_request_to_resolve_discussions_of, integer()
+  # field :discussion_to_resolve: String.t()
 
   defimpl Jason.Encoder, for: __MODULE__ do
     def encode(value, opts) do

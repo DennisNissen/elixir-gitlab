@@ -28,7 +28,7 @@ defmodule Gitlab.Issues do
   #        {:ok, Issue.t()} | {:error, binary}
   def create_issue(client, scope, new_issue) do
     issues_url = Endpoint.url({Issue, scope})
-    new_issue = new_issue |> NewIssue.cast!() |> prepare_issue_opts_for_query()
+    new_issue = new_issue |> prepare_issue_opts_for_query()
 
     with {:ok, body} <- Client.post(client, issues_url, new_issue) do
       issue_from_json(body)
@@ -55,7 +55,7 @@ defmodule Gitlab.Issues do
     issue_url = Endpoint.url(Issue.endpoint_scope(issue))
 
     with {:ok, body} <- Client.put(client, issue_url, issue) do
-      {:ok, Issue.cast!(body)}
+      {:ok, body}
     end
   end
 
@@ -76,6 +76,6 @@ defmodule Gitlab.Issues do
   end
 
   defp issue_from_json(data) do
-    {:ok, Issue.cast!(data)}
+    {:ok, data}
   end
 end

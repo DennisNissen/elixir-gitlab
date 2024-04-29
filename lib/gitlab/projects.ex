@@ -4,13 +4,14 @@ defmodule Gitlab.Projects do
 
   alias __MODULE__.{
     Project,
-    RepositoryFile,
+    RepositoryFile
   }
 
   def get_repo_file(client, project_id, file_path) do
     url = repo_file_url(project_id, file_path)
+
     with {:ok, body} <- Client.get(client, url) do
-      {:ok, RepositoryFile.cast!(body)}
+      {:ok, body}
     end
   end
 
